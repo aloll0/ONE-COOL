@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/app.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .hero-swiper {
+        --swiper-theme-color: #fff;
+        --swiper-navigation-size: 40px;
+        --swiper-pagination-bullet-size: 12px;
+        --swiper-pagination-bullet-inactive-opacity: 0.6;
+      }
+
+      .swiper-pagination-bullet {
+        width: 15px;
+        height: 15px;
+        background: transparent;
+        border: 2px solid white;
+        opacity: 0.8;
+        transition: all 0.3s;
+      }
+
+      .swiper-pagination-bullet-active {
+        background: white;
+        transform: scale(1.3);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      }
+
+      .swiper-button-next,
+      .swiper-button-prev {
+        background-color: rgba(0, 0, 0, 0.3);
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        backdrop-filter: blur(5px);
+        transition: all 0.3s;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .swiper-button-next:hover,
+      .swiper-button-prev:hover {
+        background-color: rgba(0, 0, 0, 0.6);
+        transform: scale(1.1);
+      }
+
+      .swiper-button-next::after,
+      .swiper-button-prev::after {
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      .swiper-slide video {
+        transform: scale(1.2);
+        transition: transform 8s cubic-bezier(0.25, 0.1, 0.25, 1);
+      }
+
+      .swiper-slide-active video {
+        transform: scale(1);
+      }
+
+      .animate-rotate-slow {
+        animation: rotate-slow 20s linear infinite;
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+      }
+
+      @keyframes rotate-slow {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+
+      .maqure-text {
+        display: inline-block;
+        white-space: nowrap;
+        padding-left: 100%;
+        animation: marquee 20s linear infinite;
+        font-weight: bold;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+      }
+
+      @keyframes marquee {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      .container-hero {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 1s ease;
+      }
+
+      .swiper-slide-active .container-hero {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header & Navbar -->
+    <header
+      id="header"
+      class="bg-transparent shadow-lg fixed w-full top-0 z-50 h-[12vh] transition-all duration-300"
+    >
+      <nav
+        class="container flex items-center justify-between h-full flex-row-reverse md:flex-row"
+      >
+        <!-- Icons (left) -->
+        <div
+          class="flex md:justify-end items-center space-x-4 md:space-x-6 lg:w-auto w-[40%] flex-start"
+        >
+          <!-- Search Icon -->
+          <button
+            id="search-btn"
+            class="text-white text-[30px] hover:text-blue-200 hover:-translate-y-1 transition-all duration-300 focus:outline-none"
+          >
+            <i class="fas fa-search"></i>
+          </button>
+          <!-- WhatsApp Icon -->
+          <a
+            href="https://wa.me/"
+            target="_blank"
+            class="text-white text-[30px] hover:text-green-300 hover:-translate-y-1 transition-all duration-300"
+            ><i class="fab fa-whatsapp"></i
+          ></a>
+          <!-- Facebook Icon -->
+          <a
+            href="https://facebook.com/"
+            target="_blank"
+            class="text-white text-[30px] hover:text-blue-300 hover:-translate-y-1 transition-all duration-300"
+            ><i class="fab fa-facebook"></i
+          ></a>
+          <!-- Mobile Hamburger (Right) -->
+          <div class="md:hidden flex items-center">
+            <button
+              id="mobile-menu-btn"
+              class="text-white text-3xl hover:text-blue-200 hover:-translate-y-1 transition-all duration-300 focus:outline-none ml-2"
+            >
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Logo (Center) -->
+        <div class="flex items-center justify-center lg:justify-end lg:w-[30%]">
+          <span
+            id="logo"
+            class="text-white text-4xl md:text-5xl font-extrabold tracking-widest drop-shadow-lg transition-all duration-300"
+            ><i class="fas fa-snowflake animate-spin mr-3"></i>ONE COOL</span
+          >
+        </div>
+
+        <!-- Mobile Menu (Side Drawer) -->
+        <div
+          id="mobile-menu"
+          class="md:hidden fixed top-0 right-0 h-full w-64 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 z-50 flex flex-col pt-24 space-y-6"
+        >
+          <a
+            href="#"
+            class="block text-gray-800 text-xl px-8 py-2 hover:text-blue-500 hover:-translate-y-1 transition-all duration-300 hover:bg-blue-50 rounded-lg mx-4"
+            >Home</a
+          >
+          <a
+            href="#about"
+            class="block text-gray-800 text-xl px-8 py-2 hover:text-blue-500 hover:-translate-y-1 transition-all duration-300 hover:bg-blue-50 rounded-lg mx-4"
+            >About</a
+          >
+          <a
+            href="#services"
+            class="block text-gray-800 text-xl px-8 py-2 hover:text-blue-500 hover:-translate-y-1 transition-all duration-300 hover:bg-blue-50 rounded-lg mx-4"
+            >Services</a
+          >
+          <a
+            href="#contact"
+            class="block text-gray-800 text-xl px-8 py-2 hover:text-blue-500 hover:-translate-y-1 transition-all duration-300 hover:bg-blue-50 rounded-lg mx-4"
+            >Contact</a
+          >
+        </div>
+
+        <!-- Navbar Links (right) -->
+        <div class="hidden md:flex space-x-10 items-center justify-start">
+          <a
+            href="#"
+            class="nav-link text-white text-[20px] transition-all duration-300 hover:text-blue-200 hover:-translate-y-1"
+            >Home</a
+          >
+          <a
+            href="#about"
+            class="nav-link text-white text-[20px] transition-all duration-300 hover:text-blue-200 hover:-translate-y-1"
+            >About</a
+          >
+          <a
+            href="#services"
+            class="nav-link text-white text-[20px] transition-all duration-300 hover:text-blue-200 hover:-translate-y-1"
+            >Services</a
+          >
+          <a
+            href="#contact"
+            class="nav-link text-white text-[20px] transition-all duration-300 hover:text-blue-200 hover:-translate-y-1"
+            >Contact</a
+          >
+        </div>
+      </nav>
+
+      <!-- Search Overlay -->
+      <div
+        id="search-overlay"
+        class="fixed inset-0 bg-white h-[100vh] bg-opacity-80 z-50 flex items-start justify-center transition-opacity duration-300 opacity-0 pointer-events-none"
+      >
+        <div class="w-full px-6 mt-20 relative">
+          <input
+            id="search-input"
+            type="text"
+            placeholder="ابحث هنا..."
+            class="w-full py-4 px-6 pr-12 rounded-full border-2 border-blue-500 focus:outline-none focus:border-indigo-600 text-xl text-gray-800 bg-white shadow-xl opacity-0 scale-90 transition-all duration-300 placeholder-gray-400"
+          />
+          <button
+            id="close-search"
+            class="absolute top-1/2 right-8 -translate-y-1/2 text-gray-400 hover:text-red-500 text-2xl focus:outline-none transition-colors duration-200 opacity-80"
+          >
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <script>
+      // Header scroll effect
+      const header = document.getElementById("header");
+      const navLinks = document.querySelectorAll(".nav-link");
+      const icons = document.querySelectorAll(
+        "#search-btn, a[href*='wa.me'], a[href*='facebook.com'], #mobile-menu-btn"
+      );
+      const logo = document.getElementById("logo");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          header.classList.add("bg-white", "shadow-lg");
+          header.classList.remove("bg-transparent");
+          // Change text color to dark when scrolled
+          navLinks.forEach((link) => {
+            link.classList.remove("text-white");
+            link.classList.add("text-gray-800");
+          });
+          // Change icon colors to dark when scrolled
+          icons.forEach((icon) => {
+            icon.classList.remove("text-white");
+            icon.classList.add("text-gray-800");
+          });
+          // Change logo color to blue when scrolled
+          logo.classList.remove("text-white");
+          logo.classList.add("text-blue-400");
+        } else {
+          header.classList.remove("bg-white", "shadow-lg");
+          header.classList.add("bg-transparent");
+          // Change text color back to white when at top
+          navLinks.forEach((link) => {
+            link.classList.remove("text-gray-800");
+            link.classList.add("text-white");
+          });
+          // Change icon colors back to white when at top
+          icons.forEach((icon) => {
+            icon.classList.remove("text-gray-800");
+            icon.classList.add("text-white");
+          });
+          // Change logo color back to white when at top
+          logo.classList.remove("text-blue-400");
+          logo.classList.add("text-white");
+        }
+      });
+
+      // Mobile menu toggle (side drawer)
+      const btn = document.getElementById("mobile-menu-btn");
+      const menu = document.getElementById("mobile-menu");
+      let menuOpen = false;
+      btn.addEventListener("click", () => {
+        menuOpen = !menuOpen;
+        if (menuOpen) {
+          menu.classList.remove("translate-x-full");
+          menu.classList.add("translate-x-0");
+        } else {
+          menu.classList.add("translate-x-full");
+          menu.classList.remove("translate-x-0");
+        }
+      });
+      document.addEventListener("click", (e) => {
+        if (menuOpen && !menu.contains(e.target) && !btn.contains(e.target)) {
+          menu.classList.add("translate-x-full");
+          menu.classList.remove("translate-x-0");
+          menuOpen = false;
+        }
+      });
+      // Search overlay logic
+      const searchBtn = document.getElementById("search-btn");
+      const searchOverlay = document.getElementById("search-overlay");
+      const searchInput = document.getElementById("search-input");
+      let overlayOpen = false;
+      searchBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        overlayOpen = true;
+        searchOverlay.classList.remove("opacity-0", "pointer-events-none");
+        searchOverlay.classList.add("opacity-100");
+        setTimeout(() => {
+          searchInput.classList.remove("opacity-0", "scale-90");
+          searchInput.classList.add("opacity-100", "scale-100");
+          searchInput.focus();
+        }, 100);
+      });
+      searchOverlay.addEventListener("click", (e) => {
+        if (e.target === searchOverlay) {
+          closeSearchOverlay();
+        }
+      });
+      function closeSearchOverlay() {
+        overlayOpen = false;
+        searchInput.classList.remove("opacity-100", "scale-100");
+        searchInput.classList.add("opacity-0", "scale-90");
+        setTimeout(() => {
+          searchOverlay.classList.remove("opacity-100");
+          searchOverlay.classList.add("opacity-0", "pointer-events-none");
+        }, 200);
+      }
+      document.addEventListener("keydown", (e) => {
+        if (overlayOpen && e.key === "Escape") {
+          closeSearchOverlay();
+        }
+      });
+      const closeSearchBtn = document.getElementById("close-search");
+      closeSearchBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        closeSearchOverlay();
+      });
+    </script>
+
+    <!-- Hero Section With Swiper -->
+    <section class="Hero relative md:h-[90vh] h-[110vh] overflow-hidden">
+      <!-- Swiper -->
+      <div class="swiper hero-swiper absolute inset-0 w-full h-full z-0">
+        <div class="swiper-wrapper">
+          <!-- Slide 1 -->
+          <div class="swiper-slide">
+            <video
+              class="w-full h-full object-cover"
+              autoplay
+              loop
+              muted
+              playsinline
+            >
+              <source
+                src="/video/11503031-hd_1920_1080_30fps.mp4"
+                type="video/mp4"
+              />
+            </video>
+          </div>
+          <!-- Slide 2 -->
+          <div class="swiper-slide">
+            <video
+              class="w-full h-full object-cover"
+              autoplay
+              loop
+              muted
+              playsinline
+            >
+              <source
+                src="/video/13309358_3840_2160_60fps.mp4"
+                type="video/mp4"
+              />
+            </video>
+          </div>
+          <!-- Slide 3 -->
+          <div class="swiper-slide">
+            <video
+              class="w-full h-full object-cover"
+              autoplay
+              loop
+              muted
+              playsinline
+            >
+              <source
+                src="/video/13309370_3840_2160_60fps.mp4"
+                type="video/mp4"
+              />
+            </video>
+          </div>
+        </div>
+        <!-- Pagination -->
+        <div class="swiper-pagination z-20 !bottom-8"></div>
+      </div>
+
+      <!-- Hero Content -->
+      <div
+        class="container container-hero mx-auto px-4 flex flex-col md:flex-row items-center justify-center h-full md:h-[85vh] relative z-20 gap-[6rem] lg:gap-8"
+      >
+       
+        <div
+          class="content_hero text-center lg:flex-1 flex flex-col gap-[2rem] items-center justify-center"
+        >
+          <h1
+            class="text-4xl md:text-[40px] pb-[1rem] font-extrabold text-white"
+          >
+            ONE COOL
+          </h1>
+          <p class="text-[20px] text-white mb-6">
+            موقع عصري بلمسة كجه واحترافية كاملة مع Tailwind CSS
+          </p>
+          <a
+            target="_blank"
+            href="#about"
+            class="inline-block px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-semibold rounded-full shadow-lg transform transition-transform duration-300 hover:scale-110"
+            >اعرف أكتر</a
+          >
+        </div>
+      </div>
+
+      <!-- Marquee -->
+      <div
+        class="maqure-container md:py-[7rem] py-[4rem] absolute md:bottom-[4rem] bottom-5 left-0 w-full z-20 overflow-hidden"
+      >
+        <span class="maqure-text md:text-[40px] text-[20px] text-white">
+          موقع عصري بلمسة كجه واحترافية كاملة مع Tailwind CSS; موقع عصري بلمسة
+          كجه واحترافية كاملة مع Tailwind CSS; موقع عصري بلمسة كجه واحترافية
+          كاملة مع Tailwind CSS
+        </span>
+      </div>
+    </section>
+
+    <section class="container h-[200vh] mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="flex flex-col gap-4">
+          <h2 class="text-2xl font-bold">المنتجات</h2>
+          <p class="text-gray-600">اكتشف أحدث المنتجات التي نقدمها لك</p>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+      const heroSwiper = new Swiper(".hero-swiper", {
+        loop: true,
+        autoplay: {
+          delay: 8000,
+          disableOnInteraction: false,
+        },
+        speed: 1500,
+        effect: "creative",
+        creativeEffect: {
+          prev: {
+            shadow: true,
+            translate: ["-120%", 0, -500],
+          },
+          next: {
+            shadow: true,
+            translate: ["120%", 0, -500],
+          },
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+          dynamicBullets: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        on: {
+          init: function () {
+            document.querySelector(".container-hero").style.opacity = "1";
+            document.querySelector(".container-hero").style.transform =
+              "translateY(0)";
+          },
+          slideChangeTransitionStart: function () {
+            document.querySelector(".container-hero").style.opacity = "0";
+            document.querySelector(".container-hero").style.transform =
+              "translateY(50px)";
+          },
+          slideChangeTransitionEnd: function () {
+            setTimeout(() => {
+              document.querySelector(".container-hero").style.opacity = "1";
+              document.querySelector(".container-hero").style.transform =
+                "translateY(0)";
+            }, 300);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
