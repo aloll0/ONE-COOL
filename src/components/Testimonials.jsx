@@ -12,8 +12,8 @@ export default function Testimonials() {
         "Don't just take our word for it — read reviews from our satisfied customers",
 
       stats: [
-        { number: "5000+", label: "Happy Customers" },
-        { number: "10+", label: "Years Experience" },
+        { number: "10000+", label: "Happy Customers" },
+        { number: "30+", label: "Years Experience" },
         { number: "4.9★", label: "Average Rating" },
       ],
 
@@ -58,8 +58,8 @@ export default function Testimonials() {
       subtitle: "لا تأخذ كلامنا فقط، اقرأ تقييمات عملائنا الراضين عن خدماتنا",
 
       stats: [
-        { number: "5000+", label: "عميل سعيد" },
-        { number: "10+", label: "سنوات خبرة" },
+        { number: "10000+", label: "عميل سعيد" },
+        { number: "30+", label: "سنوات خبرة" },
         { number: "4.9★", label: "متوسط التقييم" },
       ],
 
@@ -103,7 +103,10 @@ export default function Testimonials() {
   const t = content[language];
 
   return (
-    <section className="py-16 sm:py-20 bg-gradient-to-r from-blue-50 to-white">
+    <section
+      id="testimonials"
+      className="py-16 sm:py-20 bg-gradient-to-r from-blue-50 to-white"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16">

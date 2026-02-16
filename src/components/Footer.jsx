@@ -11,7 +11,7 @@ export default function Footer() {
             <h3 className="text-white text-lg font-bold mb-4">ONE COOL</h3>
             <p className="text-gray-400 text-sm leading-relaxed">
               Your trusted partner for professional AC installation,
-              maintenance, and repair services since 2014.
+              maintenance, and repair services years ago.
             </p>
           </div>
 

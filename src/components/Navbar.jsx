@@ -90,7 +90,7 @@ export default function Navbar() {
             >
               {t.products}
             </a>
-            <a href="#about" className="transition-colors hover:text-blue-400">
+            <a href="#testimonials" className="transition-colors hover:text-blue-400">
               {t.about}
             </a>
           </div>

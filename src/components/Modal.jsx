@@ -34,23 +34,7 @@ export default function Modal({ isOpen, onClose, product }) {
           </div>
 
           {/* Product Info */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Left Section - Specs */}
-            <div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
-                المواصفات
-              </h3>
-              <div className="bg-gray-50 rounded-lg p-4 space-y-3">
-                {product.specs.map((spec, index) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <span className="text-blue-600 font-bold mt-1">✓</span>
-                    <span className="text-gray-700">{spec}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Right Section - Pricing & Details */}
+          <div className="">
             <div>
               <div className="mb-6">
                 <h3 className="text-sm text-gray-600 mb-2">السعر</h3>
