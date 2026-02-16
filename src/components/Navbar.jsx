@@ -152,7 +152,7 @@ export default function Navbar() {
             {/* Call Now Button */}
             <a
               href="tel:+201007596703"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors duration-300"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 md:px-6 py-2 rounded-lg font-semibold transition-colors duration-300"
             >
               {t.callNow}
             </a>
